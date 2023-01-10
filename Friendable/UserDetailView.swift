@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct UserDetailView: View {
-    let user: User
+    let user: CachedUser
     var body: some View {
         VStack {
              Section {
-                 Text(user.name)
+                 Text(user.wrappedName)
                     .font(.largeTitle)
                     .fontWeight(.bold)
              }
@@ -39,29 +39,18 @@ struct UserDetailView: View {
                     }
                     HStack {
                         Text("Email: ")
-                        Text(user.email)
+                        Text(user.wrappedEmail)
                     }
                     HStack {
                         Text("Address: ")
-                        Text(user.address)
+                        Text(user.wrappedAddress)
                     }
                 }
-            }
-            Section {
-                HStack {
-                    ForEach(user.tags, id: \.self) { tag in
-                        Text(tag)
-                    }
-                }
-            } header: {
-                Text("Tags:")
-                    .font(.title2)
-                    .fontWeight(.semibold)
             }
             Section {
                 List {
-                    ForEach(user.friends, id: \.id) { friend in
-                        Text(friend.name)
+                    ForEach(user.friendsArray, id: \.id) { friend in
+                        Text(friend.wrappedName)
                     }
                 }
                 
@@ -74,9 +63,9 @@ struct UserDetailView: View {
     }
 }
 
-struct UserDetailView_Previews: PreviewProvider {
-    static var user = User.example
-    static var previews: some View {
-        UserDetailView(user: user)
-    }
-}
+//struct UserDetailView_Previews: PreviewProvider {
+//    static var user = User.example
+//    static var previews: some View {
+//        UserDetailView(user: CachedUser)
+//    }
+//}
